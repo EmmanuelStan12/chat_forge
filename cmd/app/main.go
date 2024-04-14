@@ -3,21 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
-	"io"
 	"os"
-	"os/signal"
+
+	"github.com/EmmanuelStan12/chat_forge/internal/app"
 )
-
-func run(ctx context.Context, w io.Writer, args []string) error {
-	ctx, cancel := signal.NotifyContext(ctx, os.Interrupt)
-	defer cancel()
-
-	return nil
-}
 
 func main() {
 	ctx := context.Background()
-	if err := run(ctx, os.Stdout, os.Args); err != nil {
+	if err := app.Run(ctx, os.Stdout, os.Args); err != nil {
 		fmt.Printf("%s\n", err)
 		os.Exit(1)
 	}
